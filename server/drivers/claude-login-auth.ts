@@ -40,11 +40,14 @@ export function claudeLoginPrompt(output: string): { authorizationUrl: string } 
   return null;
 }
 
-/** What Anthropic's page shows after sign-in: a code, sometimes with `#state`. */
+/** What Anthropic's page shows after sign-in: a code, sometimes with `#state`. Never the short digits-only login code
+ * Claude emails, which belongs on Claude's own page. */
 export function claudeLoginCode(value: string): string | null {
   const code = value.trim();
-  return /^[A-Za-z0-9_\-#.:]{8,1024}$/.test(code) ? code : null;
+  return /^[A-Za-z0-9_\-#.:]{8,1024}$/.test(code) && !/^\d{1,8}$/.test(code) ? code : null;
 }
+
+const NOT_THE_CODE = "That is not the code from Claude's page. If it is the login code Claude emails you, enter it on Claude's page, click Authorize, then paste the longer code Claude shows.";
 
 type Flow = {
   status: ProviderAuthenticationStatus;
@@ -74,6 +77,8 @@ interface ClaudeLoginOptions {
 }
 
 const NOT_AVAILABLE = "This sign-in is no longer available. Start sign-in again.";
+/** 404 tells the app the sign-in is gone, so it offers a fresh one. */
+const notAvailable = () => Object.assign(new Error(NOT_AVAILABLE), { status: 404 });
 
 export class ClaudeLoginController {
   private flow: Flow | null = null;
@@ -143,14 +148,14 @@ export class ClaudeLoginController {
 
   async complete(flowId: string, pasted: string): Promise<void> {
     const flow = this.flow;
-    if (!flowId || flow?.status.flowId !== flowId) throw new Error(NOT_AVAILABLE);
-    if (flow.status.phase !== "waiting" || !flow.ready) throw new Error(NOT_AVAILABLE);
+    if (!flowId || flow?.status.flowId !== flowId) throw notAvailable();
+    if (flow.status.phase !== "waiting" || !flow.ready) throw notAvailable();
     if (flow.codeSent) throw new Error("A code was already sent for this sign-in. Wait for the result, or cancel and start again.");
     const code = claudeLoginCode(pasted);
-    if (!code) throw new Error("Paste the whole code shown on Anthropic's page after signing in.");
+    if (!code) throw new Error(NOT_THE_CODE);
     const child = flow.child;
     const stdin = child?.stdin;
-    if (!child || !stdin || child.exitCode !== null || child.signalCode !== null) throw new Error(NOT_AVAILABLE);
+    if (!child || !stdin || child.exitCode !== null || child.signalCode !== null) throw notAvailable();
     flow.codeSent = true;
     await new Promise<void>((resolveDone, rejectDone) => {
       flow.completion = { resolve: resolveDone, reject: rejectDone };
@@ -166,7 +171,7 @@ export class ClaudeLoginController {
   }
 
   async get(flowId: string): Promise<ProviderAuthenticationStatus> {
-    if (!flowId || this.flow?.status.flowId !== flowId) throw new Error(NOT_AVAILABLE);
+    if (!flowId || this.flow?.status.flowId !== flowId) throw notAvailable();
     return { ...this.flow.status };
   }
 

@@ -163,7 +163,8 @@ export class DeviceAuthController {
   }
 
   async get(flowId: string): Promise<ProviderAuthenticationStatus> {
-    if (!flowId || this.flow?.status.flowId !== flowId) throw new Error("This sign-in is no longer available. Start sign-in again.");
+    // 404 tells the app the sign-in is gone, so it offers a fresh one.
+    if (!flowId || this.flow?.status.flowId !== flowId) throw Object.assign(new Error("This sign-in is no longer available. Start sign-in again."), { status: 404 });
     return { ...this.flow.status };
   }
 
