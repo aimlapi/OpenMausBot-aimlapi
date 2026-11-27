@@ -1,4 +1,4 @@
-import { Clapperboard, CreditCard, Mail, PhoneCall, RadioTower, Smartphone, type LucideIcon } from "lucide-react";
+import { Boxes, Clapperboard, CreditCard, Mail, PhoneCall, RadioTower, Smartphone, type LucideIcon } from "lucide-react";
 
 import bubblavLogo from "@/assets/bubblav/logo.png";
 import whopLogo from "@/assets/whop/logo.png";
@@ -103,6 +103,16 @@ export const HOSTED_MCP_APPS = [
     description: "higgsfield.description",
     notice: "higgsfield.notice",
     keywords: "higgsfield ai image video generate generation picture clip film soul kling seedance",
+  },
+  {
+    id: "aimlapi",
+    label: "AI/ML API",
+    url: "https://mcp.aimlapi.com/mcp",
+    // AI/ML API publishes no logo licence we have checked, so a neutral glyph stands in.
+    icon: { glyph: Boxes },
+    description: "aimlapi.description",
+    notice: "aimlapi.notice",
+    keywords: "aimlapi ai ml api models llm chat image video music speech transcription ocr embeddings web search crawl scrape markdown pdf documents seo social",
   },
 ] as const satisfies readonly HostedMcpApp[];
 

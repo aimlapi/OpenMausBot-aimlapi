@@ -51,6 +51,8 @@
   "bubblav.notice": "Sign in with BubblaV and choose one chatbot. No API key needed. With Full access, a bot that can use BubblaV can read that chatbot’s conversations and leads and change or delete its knowledge and settings, so choose which bots get it under Bot access. Choose Read only on BubblaV’s consent page to block every change.",
   "higgsfield.description": "AI images and videos your bots make with Higgsfield models, on your own Higgsfield account.",
   "higgsfield.notice": "Sign in with your Higgsfield account. No API key needed. A bot that can use Higgsfield can start image and video generations that spend credits on your account, so choose which bots get it under Bot access.",
+  "aimlapi.description": "Web search, page crawling, document parsing, SEO and social media data, plus chat, image, video, music, speech and embedding models, on your own AI/ML API account.",
+  "aimlapi.notice": "Sign in with your AI/ML API account. No API key needed. Looking up models and checking your account are free; chat, generations, embeddings and tool runs are billed to your account, so choose which bots get it under Bot access.",
   "email.title": "Email",
   "email.description": "Read and send mail on any mail host, with your address and password.",
   "email.menu": "Email options",

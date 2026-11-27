@@ -58,6 +58,16 @@ describe("hosted MCP apps", () => {
     for (const app of HOSTED_MCP_APPS) if ("key" in app) expect(app.key.url).toMatch(/^https:\/\//);
   });
 
+  it("offers AI/ML API's hosted server with browser sign-in, only at its exact MCP host", () => {
+    const app = HOSTED_MCP_APPS.find((entry) => entry.id === "aimlapi");
+    expect(app).toMatchObject({ label: "AI/ML API", url: "https://mcp.aimlapi.com/mcp", description: "aimlapi.description", notice: "aimlapi.notice" });
+    expect(app && "key" in app).toBe(false);
+    expect(hostedMcpApp({ type: "http", url: "https://mcp.aimlapi.com/mcp" })?.id).toBe("aimlapi");
+    for (const url of ["https://api.aimlapi.com/mcp", "https://aimlapi.com/mcp", "https://mcp.aimlapi.com.evil.test/mcp", "https://evil.test/mcp.aimlapi.com/mcp", "https://mcp.aimlapi.com:8443/mcp", "https://mcp.aimlapi.com/v1/mcp"]) {
+      expect(hostedMcpApp({ type: "http", url }), url).toBeUndefined();
+    }
+  });
+
   it("counts each app on its own server", () => {
     const [first] = HOSTED_MCP_APPS;
     const connections = hostedConnections([

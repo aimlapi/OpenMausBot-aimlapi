@@ -126,6 +126,18 @@ key named **MCP Client** under **Settings → API Keys**, where revoking it ends
 the connection. The key lasts one year, then the card asks you to sign in
 again. See [BubblaV's OpenMausBot guide](https://docs.bubblav.com/user-guide/integrations/openmausbot).
 
+### AI/ML API
+
+In Plugins, find **AI/ML API** and click **Connect**. The card uses AI/ML API's
+official hosted MCP endpoint, `https://mcp.aimlapi.com/mcp`, and opens AI/ML
+API's browser sign-in, so no API key is needed. One connection gives bots web
+search, page crawling and extraction, document parsing, SEO and social media
+data, and AI/ML API's chat, image, video, music, speech and embedding models.
+Looking up models and checking the account are free; chat, generations,
+embeddings and tool runs are billed to your AI/ML API account, so choose which
+bots get it under **Bot access**. See the
+[AI/ML API MCP docs](https://docs.aimlapi.com/quickstart/mcp).
+
 ### Servers that ask you to sign in
 
 Some URL servers take no token; they want you to sign in with your browser
