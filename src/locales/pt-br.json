@@ -11823,6 +11823,8 @@
   "alwaysOn.status.noWay": "Casa ligada · nenhum celular ou computador consegue alcançá-la ainda",
   "higgsfield.description": "Imagens e vídeos de IA que seus bots criam com os modelos da Higgsfield, na sua própria conta da Higgsfield.",
   "higgsfield.notice": "Entre com a sua conta da Higgsfield. Não é preciso chave de API. Um bot que pode usar a Higgsfield pode iniciar gerações de imagens e vídeos que gastam créditos da sua conta, então escolha quais bots recebem esse acesso em Acesso dos bots.",
+  "aimlapi.description": "Busca na web, leitura de páginas, análise de documentos, dados de SEO e de redes sociais, além de modelos de chat, imagem, vídeo, música, voz e embeddings, na sua própria conta da AI/ML API.",
+  "aimlapi.notice": "Entre com a sua conta da AI/ML API. Não é preciso chave de API. Consultar modelos e verificar a sua conta é grátis; chat, gerações, embeddings e execuções de ferramentas são cobrados na sua conta, então escolha quais bots recebem esse acesso em Acesso dos bots.",
   "imageGen.slot.needsHiggsfield": "Precisa da Higgsfield conectada: conecte abaixo.",
   "imageGen.higgsfield.connected": "Conectado à sua conta da Higgsfield",
   "imageGen.higgsfield.notConnected": "Não conectado, ou o login expirou",
